@@ -1,2 +1,2 @@
-# cop.nyc
-Buying and Selling
+# Cozy Exchange
+virtual market for your cozy goods
