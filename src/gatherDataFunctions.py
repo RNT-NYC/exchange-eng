@@ -35,6 +35,17 @@ def getLeastSolrPrice(itemName):
             will update the item's row to import the new least sold price
     """
 
+    cur.execute("""SELECT transactions.AmountExchanged FROM transactions
+    LEFT JOIN listings ON (transactions.listingID = listings.listingID)
+    LEFT JOIN items ON (listings.name = items.name)
+    WHERE items.name = """ +"'" + itemName + "'" + """ AND listings.onSale = FALSE
+    ORDER BY transactions.AmountExchanged
+    LIMIT 1;""")
+
+    return cur.fetchone()
+
+
+
 
 def highestSoldPrice(itemName):
     """
@@ -47,6 +58,15 @@ def highestSoldPrice(itemName):
         Return:
             will update the item's row to import the new highest sold price
     """
+
+    cur.execute("""SELECT transactions.AmountExchanged FROM transactions
+    LEFT JOIN listings ON (transactions.listingID = listings.listingID)
+    LEFT JOIN items ON (listings.name = items.name)
+    WHERE items.name = """ +"'" + itemName + "'" + """ AND listings.onSale = FALSE
+    ORDER BY transactions.AmountExchanged DESC
+    LIMIT 1;""")
+
+    return cur.fetcone()
 
 
 def lowestCurrentPrice(itemName):
@@ -61,6 +81,15 @@ def lowestCurrentPrice(itemName):
             will update the item's row to import the new lowest current price
     """
 
+    cur.execute("""SELECT transactions.AmountExchanged FROM transactions
+    LEFT JOIN listings ON (transactions.listingID = listings.listingID)
+    LEFT JOIN items ON (listings.name = items.name)
+    WHERE items.name = """ +"'" + itemName + "'" + """ AND listings.onSale = TRUE
+    ORDER BY transactions.AmountExchanged
+    LIMIT 1;""")
+
+    return cur.fetchone()
+
 
 def highestCurrentPrice(itemName):
     """
@@ -73,3 +102,12 @@ def highestCurrentPrice(itemName):
         Return:
             will update the item's row to import the new highest current price
     """
+
+        cur.execute("""SELECT transactions.AmountExchanged FROM transactions
+        LEFT JOIN listings ON (transactions.listingID = listings.listingID)
+        LEFT JOIN items ON (listings.name = items.name)
+        WHERE items.name = """ +"'" + itemName + "'" + """ AND listings.onSale = TRUE
+        ORDER BY transactions.AmountExchanged DESC
+        LIMIT 1;""")
+
+        return cur.fetchone()

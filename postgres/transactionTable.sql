@@ -11,5 +11,5 @@ CREATE TABLE transactions(
   timeOfSale              date,
   ratingSeller            integer,
   ratingBuyer             integer,
-  isValid                 boolean,
+  isValid                 boolean
 );
